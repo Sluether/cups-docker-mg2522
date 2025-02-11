@@ -10,7 +10,8 @@ services:
         environment:
             - CUPSADMIN=printeradmin
             - CUPSPASSWORD=print
-        #volumes:
-        #    - ./cups_config/cupsd.conf:/etc/cups/cupsd.conf
+        volumes:
+            - ./cups_config:/etc/cups
+            
 
 
