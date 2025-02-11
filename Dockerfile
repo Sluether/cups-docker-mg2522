@@ -7,34 +7,27 @@ ENV CUPSADMIN admin
 ENV CUPSPASSWORD password
 
 
-LABEL org.opencontainers.image.source="https://github.com/anujdatar/cups-docker"
-LABEL org.opencontainers.image.description="CUPS Printer Server"
-LABEL org.opencontainers.image.author="Anuj Datar <anuj.datar@gmail.com>"
-LABEL org.opencontainers.image.url="https://github.com/anujdatar/cups-docker/blob/main/README.md"
+LABEL org.opencontainers.image.source="https://github.com/Sluether/cups-docker-mg2522/"
+LABEL org.opencontainers.image.description="CUPS Printer Server - forked from Anuj Datar's repo - >ee https://github.com/anujdatar/cups-docker"
+LABEL org.opencontainers.image.author="unknown <unknown@unknown.com>"
+LABEL org.opencontainers.image.url="https://github.com/Sluether/cups-docker-mg2522/blob/main/README.md"
 LABEL org.opencontainers.image.licenses=MIT
 
 
 # Install dependencies
-RUN apt-get update -qq  && apt-get upgrade -qqy \
+RUN apt-get update -qq  
+    && apt-get upgrade -qqy \
     && apt-get install -qqy \
-    apt-utils \
-    usbutils \
     cups \
     cups-filters \
-    printer-driver-all \
+    # apt-utils \
+    usbutils \
+    # printer-driver-all \
     printer-driver-cups-pdf \
-    printer-driver-foo2zjs \
-    foomatic-db-compressed-ppds \
-    openprinting-ppds \
-    hpijs-ppds \
-    hp-ppd \
-    hplip \
-    avahi-daemon \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /tmp/*
 
-EXPOSE 631
-EXPOSE 5353/udp
+EXPOSE 635
 
 # Baked-in config file changes
 RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && \
