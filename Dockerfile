@@ -53,4 +53,5 @@ VOLUME [ "/etc/cups" ]
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-CMD ["/entrypoint.sh"]
+#CMD ["/entrypoint.sh"]
+CMD ["sh", "-c", "ulimit -n 65535 && /entrypoint.sh"]
