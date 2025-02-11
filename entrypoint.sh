@@ -16,4 +16,4 @@ if [ ! -f /etc/cups/cupsd.conf ]; then
     cp -rpn /etc/cups-bak/* /etc/cups/
 fi
 
-exec /usr/sbin/cupsd -f
+exec "ulimit -n 65535 && /usr/sbin/cupsd -f"
